@@ -1,12 +1,19 @@
-import express, { type Request, type Response } from 'express'
+import express from 'express'
+import dotenv from "dotenv"
+import { Routers } from './app/router/index.ts'
 
-const app = express()
+
+dotenv.config()
+
+const app=express()
 
 app.use(express.json())
 
-app.get('/',(req:Request,res:Response)=>{
-    res.send('I am a Lone Server')
-})
 
+app.use('/api/v1',Routers)
+
+app.get('/',(req,res)=>{
+    res.send('hello world')
+})
 
 export default app
