@@ -1,7 +1,8 @@
 import express from 'express'
 import dotenv from "dotenv"
 import { Routers } from './app/router/index.ts'
-
+import notFound from './app/middleware/notFound.ts'
+import globalError from './app/middleware/globalError.ts'
 
 dotenv.config()
 
@@ -11,6 +12,9 @@ app.use(express.json())
 
 
 app.use('/api/v1',Routers)
+
+app.use(notFound)
+app.use(globalError)
 
 app.get('/',(req,res)=>{
     res.send('hello world')
