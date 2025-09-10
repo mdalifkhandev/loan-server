@@ -5,3 +5,9 @@ export type TUser={
     role:'user'|'lender',
     isDeleted:boolean
 }
+
+
+export type TLogin={
+    email:string,
+    password:string
+}
