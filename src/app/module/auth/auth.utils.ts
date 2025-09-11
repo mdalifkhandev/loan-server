@@ -5,8 +5,6 @@ export const createToken = (
   secret: string,
   expiresIn: number
 ) => {;
-  console.log(jwtPayload,secret,expiresIn);
-  
   return jwt.sign(jwtPayload, secret, {expiresIn});
 };
 
