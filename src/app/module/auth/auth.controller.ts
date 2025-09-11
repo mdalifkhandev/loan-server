@@ -21,10 +21,8 @@ const userCreated=catchAsync(async(req,res)=>{
 
 const userLogin=catchAsync(async(req,res)=>{
     const user=req.body
-    console.log(user);
-    
     const data=await AuthServices.userLoginFromDB(user)
-    res.cookie("accessToken",data,{
+    res.cookie("accessToken",data.accessToken,{
         secure:true,
         httpOnly:true,
         sameSite:true,
@@ -34,23 +32,41 @@ const userLogin=catchAsync(async(req,res)=>{
         statusCode:httpStatus.OK,
         success:true,
         message:'Login successfully',
-        data:'data'
+        data:data.user
     })
 })
 
-const getUser=catchAsync(async(req,res)=>{
-    const resualt=await AuthServices.getUserFromDB()
+
+
+const LogOut=catchAsync(async(req,res)=>{
+    const resualt=await AuthServices.LogOutFromDB(req.user)
+    res.cookie('accessToken','')
     sendResponse(res,{
         statusCode:httpStatus.OK,
         success:true,
-        message:'user get successfully',
+        message:'User Logout Successfully',
         data:resualt
     })
 })
 
 
+const updathPassword=catchAsync(async(req,res)=>{
+    const email=req.user.email
+    const data=req.body
+    const result=await AuthServices.updathPasswordFromDB(email,data)
+    sendResponse(res,{
+        statusCode:httpStatus.OK,
+        success:true,
+        message:'Password Updath successfullt',
+        data:result
+    })
+})
+
+
+
 export const AuthController={
     userCreated,
     userLogin,
-    getUser
+    LogOut,
+    updathPassword
 }

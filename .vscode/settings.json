@@ -1,0 +1,8 @@
+{
+  // Disable automatic Copilot suggestions
+  "editor.inlineSuggest.enabled": false,
+  "github.copilot.inlineSuggest.enable": false,
+  "github.copilot.enable": {
+    "workspace": true
+  },
+}

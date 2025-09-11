@@ -1,16 +1,17 @@
 import AppError from "../../error/appError.ts";
-import type { TLogin, TUser } from "./auth.interface.ts";
+import type { TLogin, TUpdathPassword, TUser } from "./auth.interface.ts";
 import { User } from "./auth.model.ts";
 import httpStatus from 'http-status'
 import bcrypt from 'bcrypt'
 import { createToken } from "./auth.utils.ts";
+import type { JwtPayload } from "jsonwebtoken";
 
 const userCreatedFromDB=async(data:TUser)=>{
     const secret=process.env.JWT_SECRET as string
     const user=await User.findOne({email:data.email})
     const salt=10
     if(user){
-        throw AppError(409,"This Email is Alrady exisit")
+        throw AppError(httpStatus.CONFLICT,"This Email is Alrady exisit")
     }
     const password=await bcrypt.hash(data.password, salt)
     const newData={
@@ -29,8 +30,6 @@ const userCreatedFromDB=async(data:TUser)=>{
     }
 }
 
-
-
 const userLoginFromDB=async(data:TLogin)=>{
     const {email,password}=data
      const secret=process.env.JWT_SECRET as string
@@ -38,9 +37,13 @@ const userLoginFromDB=async(data:TLogin)=>{
     if(!user){
         throw AppError(httpStatus.NOT_FOUND,'Email not exixit')
     }
-    const passwordMatch=bcrypt.compare(password,user.password)
+    const passwordMatch=await bcrypt.compare(password,user.password)
+    
     if(!passwordMatch){
-        throw AppError(httpStatus.NOT_FOUND,'Password incored')
+        throw AppError(httpStatus.UNAUTHORIZED,'Password incorrect')
+    }
+    if(user.isDeleted){
+        throw AppError(httpStatus.GONE,'User is deleted')
     }
     const jwtPayload={
         email,
@@ -48,16 +51,59 @@ const userLoginFromDB=async(data:TLogin)=>{
     }
     const accessToken=createToken(jwtPayload,secret,3600*24)
 
-    return accessToken
+    return {
+        accessToken,
+        user
+    }
 }
 
-const getUserFromDB=async()=>{
-    const resualt=await User.find()
-    return resualt
+
+
+const LogOutFromDB=async(data:JwtPayload)=>{
+    const user=await User.findOne({email:data.email})
+    if(!user){
+        throw AppError(httpStatus.NOT_FOUND,'User is not Found')
+    }
+    if(user.isDeleted){
+        throw AppError(httpStatus.NOT_FOUND,'User is deleted')
+    }
+
+    return user
 }
+
+const updathPasswordFromDB=async(email:string,data:TUpdathPassword)=>{
+    const newConfirmMatch=data.newPassword===data.confirmPassword
+
+    if(!newConfirmMatch){
+        throw AppError(httpStatus.BAD_REQUEST,'New Password and Confirm Password Not Match')
+    }
+
+    const user=await User.findOne({email})
+
+    if(!user){
+        throw AppError(httpStatus.BAD_REQUEST,'User Not found')
+    }
+
+    const isPasswordMatch=await bcrypt.compare(data.currentPassword,user.password)
+
+    if(!isPasswordMatch){
+        throw AppError(httpStatus.BAD_REQUEST,'Incored Password')
+    }
+
+    const newHashPassword=await bcrypt.hash(data.newPassword,10)
+
+    const result=await User.findOneAndUpdate({email},{password:newHashPassword},{new:true})
+
+    return result
+}   
+
+
+// const resetPassword=()
+
 
 export const AuthServices={
     userCreatedFromDB,
     userLoginFromDB,
-    getUserFromDB
+    LogOutFromDB,
+    updathPasswordFromDB
 }

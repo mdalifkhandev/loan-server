@@ -6,20 +6,21 @@ import httpStatus from 'http-status'
 import jwt, { type JwtPayload } from 'jsonwebtoken'
 
 const auth = (...RequiredRoll: TUser_Role[]) => {
-    console.log('adfasdf');
-    
     return catchAsync(async (req, res, next) => {
         const token =req.cookies.accessToken
-        console.log(token);
         const jwtsecret = process.env.JWT_SECRET as string
         if (!token) {
             throw AppError(httpStatus.UNAUTHORIZED, 'You have unauthorized')
         }
 
         const decoded = jwt.verify(token, jwtsecret) as JwtPayload
-        const {email,role,iat,exp}=decoded
-
-        console.log(decoded);
+        const {email,role}=decoded
+        const exp=decoded.exp ?? 0
+        const expire=new Date(exp*1000)
+        const now=new Date()
+        if(now>expire){
+            throw AppError(httpStatus.NOT_FOUND,"Login Time out Login again")
+        }
 
         if(RequiredRoll && !RequiredRoll.includes(role)){
             throw AppError(httpStatus.FORBIDDEN,'You are unauthorized .please login and try again')
