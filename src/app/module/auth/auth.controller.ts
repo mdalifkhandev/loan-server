@@ -62,11 +62,44 @@ const updathPassword=catchAsync(async(req,res)=>{
     })
 })
 
+const sendMail=catchAsync(async(req,res)=>{
+    const email=req.body.email
+    const result=await AuthServices.sendMailFromDB(email)
+    sendResponse(res,{
+        statusCode:httpStatus.OK,
+        success:true,
+        message:'OTP Send successfully',
+        data:result
+    })
+})
 
+const otpCodeVerify=catchAsync(async(req,res)=>{
+    const {otp,email}=req.body
+    const result=await AuthServices.otpCodeVerifyFromDB(otp,email)
+    sendResponse(res,{
+        statusCode:httpStatus.OK,
+        success:true,
+        message:"Code verified. You may reset your password now.",
+        data:result
+    })
+})
+
+const resetPassword=catchAsync(async(req,res)=>{
+    const result= await AuthServices.resetPasswordFromDB(req.body)
+    sendResponse(res,{
+        statusCode:httpStatus.OK,
+        success:true,
+        message:'password reset successfully',
+        data:result
+    })
+})
 
 export const AuthController={
     userCreated,
     userLogin,
     LogOut,
-    updathPassword
+    updathPassword,
+    sendMail,
+    otpCodeVerify,
+    resetPassword
 }
