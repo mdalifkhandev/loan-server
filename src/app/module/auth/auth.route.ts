@@ -15,4 +15,10 @@ router.post('/logout',auth(USER_ROLE.user,USER_ROLE.admin,USER_ROLE.lender),Auth
 
 router.post('/update-password',auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.lender),AuthController.updathPassword)
 
+router.post('/send-mail',AuthController.sendMail)
+
+router.post('/otp-verify',AuthController.otpCodeVerify) 
+
+router.post('/reset-password',AuthController.resetPassword) 
+
 export const AuthRouter=router

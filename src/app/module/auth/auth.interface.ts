@@ -1,9 +1,15 @@
 export type TUser={
-    name:string,
+    firstName:string,
+    lastName:string,
     email:string,
     password:string,
-    role:'user'|'lender',
-    isDeleted:boolean
+    role:'user'|'lender'|'admin',
+    isDeleted:boolean,
+    phone:number,
+    streetAddress:string
+    city:string
+    state:string
+    zipCode:string
 }
 
 
@@ -16,4 +22,9 @@ export type TUpdathPassword={
     currentPassword:string
     newPassword:string
     confirmPassword:string
+}
+export type TResetPassword={
+    newPassword:string
+    confirmPassword:string
+    email:string
 }
