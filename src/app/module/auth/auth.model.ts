@@ -28,28 +28,8 @@ const userSchema=new Schema<TUser>({
         type:Boolean,
         default:false
     },
-    phone: {
-        type: Number,
-        required: false, 
-    },
-    streetAddress: { 
-        type: String,
-        required: false, 
-    },
-    city: {
-        type: String,
-        required: false, 
-    },
-    state: {
-        type: String,
-        required: false, 
-    },
-    zipCode: {
-        type: String,
-        required: false, 
-    },
-
-
+},{
+    timestamps:true
 })
 
 export const User= model('User',userSchema)
