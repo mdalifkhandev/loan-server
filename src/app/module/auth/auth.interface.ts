@@ -5,11 +5,6 @@ export type TUser={
     password:string,
     role:'user'|'lender'|'admin',
     isDeleted:boolean,
-    phone:number,
-    streetAddress:string
-    city:string
-    state:string
-    zipCode:string
 }
 
 

@@ -21,22 +21,7 @@ const authValidationSchema = z.object({
       .default("user"),
     isDeleted: z
       .boolean()
-      .default(false),
-    phone: z
-      .number()
-      .optional(),
-    streetAddress: z
-      .string()
-      .optional(),
-    city: z
-      .string()
-      .optional(),
-    state: z
-      .string()
-      .optional(),
-    zipCode: z
-      .string()
-      .optional(),
+      .default(false)
   }),
 });
 

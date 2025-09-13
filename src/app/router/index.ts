@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { AuthRouter } from "../module/auth/auth.route.ts";
-import { UserRouter } from "../module/users/user.route.ts";
+import { UserRouter } from "../module/profile/profile.route.ts";
+import { ApplyLoneRouter } from "../module/aplyLone/applyLone.route.ts";
 
 const router=Router()
 
@@ -12,7 +13,11 @@ const moduleRoute=[
     {
         path:'/user',
         rout:UserRouter
-    }
+    },
+    {
+        path:'/lone',
+        rout:ApplyLoneRouter
+    },
 ]
 
 moduleRoute.forEach((route)=>router.use(route.path,route.rout))
