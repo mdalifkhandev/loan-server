@@ -5,7 +5,7 @@ import httpStatus from 'http-status'
 import { ApplyLone } from "./applyLone.model.ts";
 
 const applyLoneFromDB=async(data:TAplyLone)=>{
-    const profile=await Profile.findOne({profileId:data.profileId})
+    const profile=await Profile.findOne({_id:data.profileId})
     if(!profile){
         throw AppError(httpStatus.BAD_REQUEST,'Profile does not exisit')
     }
