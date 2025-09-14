@@ -13,7 +13,7 @@ const applyLoneFunctin=catchAsync(async(req,res)=>{
     })
 })
 
-const AproveLone=catchAsync(async(req,res)=>{
+const aproveLone=catchAsync(async(req,res)=>{
     const result=await ApplyLoneService.aproveLoneFromDB(req.body)
     sendResponse(res,{
         statusCode:httpStatus.OK,
@@ -23,8 +23,19 @@ const AproveLone=catchAsync(async(req,res)=>{
     })
 })
 
+const getAllLone=catchAsync(async(req,res)=>{
+    const result=await ApplyLoneService.getAllLoneToDB()
+    sendResponse(res,{
+        success:true,
+        statusCode:httpStatus.OK,
+        message:"get all lone successfully",
+        data:result
+    })
+})
+
 
 export const ApplyLoneController={
     applyLoneFunctin,
-    AproveLone
+    aproveLone,
+    getAllLone
 }

@@ -29,7 +29,13 @@ const aproveLoneFromDB=async(data:TAplyLone)=>{
     return result
 }
 
+const getAllLoneToDB=async()=>{
+    const result=await ApplyLone.find()
+    return result
+}
+
 export const ApplyLoneService={
     applyLoneFromDB,
-    aproveLoneFromDB
+    aproveLoneFromDB,
+    getAllLoneToDB
 }
