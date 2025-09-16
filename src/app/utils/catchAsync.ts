@@ -1,4 +1,7 @@
 import type { NextFunction, Request, RequestHandler, Response } from "express";
+import { JwtPayload } from "jsonwebtoken";
+
+
 
 const catchAsync=(fn:RequestHandler)=>{
     return (req:Request,res:Response,next:NextFunction)=>{

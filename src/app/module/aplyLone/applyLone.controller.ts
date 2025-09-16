@@ -1,6 +1,6 @@
-import catchAsync from "../../utils/catchAsync.ts";
-import sendResponse from "../../utils/sendResponse.ts";
-import { ApplyLoneService } from "./applyLone.service.ts";
+import catchAsync from "../../utils/catchAsync";
+import sendResponse from "../../utils/sendResponse";
+import { ApplyLoneService } from "./applyLone.service";
 import httpStatus from 'http-status'
 
 const applyLoneFunctin=catchAsync(async(req,res)=>{

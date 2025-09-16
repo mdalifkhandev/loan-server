@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { AuthController } from "./auth.controller.ts";
-import auth from "../../middleware/auth.ts";
-import { USER_ROLE } from "../../interface/types.ts";
-import validationRequest from "../../middleware/validationRequest.ts";
-import { AuthValidation } from "./auth.validation.ts";
+import { AuthController } from "./auth.controller";
+import auth from "../../middleware/auth";
+import { USER_ROLE } from "../../interface/types";
+import validationRequest from "../../middleware/validationRequest";
+import { AuthValidation } from "./auth.validation";
 
 const router=Router()
 

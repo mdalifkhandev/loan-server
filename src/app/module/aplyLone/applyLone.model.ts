@@ -1,6 +1,6 @@
 
 import { model, Schema } from "mongoose";
-import type { TAplyLone } from "./applyLone.interface.ts";
+import type { TAplyLone } from "./applyLone.interface";
 
 const applyLoneSchema = new Schema<TAplyLone>({
     profileId: {

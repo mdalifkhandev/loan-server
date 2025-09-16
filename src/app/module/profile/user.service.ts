@@ -1,9 +1,9 @@
-import AppError from "../../error/appError.ts"
-import type { TUser } from "../auth/auth.interface.ts"
-import { User } from "../auth/auth.model.ts"
+import AppError from "../../error/appError"
+import type { TUser } from "../auth/auth.interface"
+import { User } from "../auth/auth.model"
 import httpStatus from "http-status"
-import type { TUserProfileUpdate } from "./profile.interface.ts"
-import { Profile } from "./profile.model.ts"
+import type { TUserProfileUpdate } from "./profile.interface"
+import { Profile } from "./profile.model"
 
 const userDeletedFromDB=async(email:string)=>{
     const user=await User.findOne({email})

@@ -1,9 +1,9 @@
-import AppError from "../../error/appError.ts";
-import type { TLogin, TResetPassword, TUpdathPassword, TUser } from "./auth.interface.ts";
-import { User } from "./auth.model.ts";
+import AppError from "../../error/appError";
+import type { TLogin, TResetPassword, TUpdathPassword, TUser } from "./auth.interface";
+import { User } from "./auth.model";
 import httpStatus from 'http-status'
 import bcrypt from 'bcrypt'
-import { createToken } from "./auth.utils.ts";
+import { createToken } from "./auth.utils";
 import type { JwtPayload } from "jsonwebtoken";
 import nodemailer from 'nodemailer'
 import crypto from 'crypto'

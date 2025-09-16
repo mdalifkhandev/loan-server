@@ -1,7 +1,7 @@
-import AppError from "../error/appError.ts";
-import type { TUser_Role } from "../interface/types.ts";
-import { User } from "../module/auth/auth.model.ts";
-import catchAsync from "../utils/catchAsync.ts";
+import AppError from "../error/appError";
+import type { TUser_Role } from "../interface/types";
+import { User } from "../module/auth/auth.model";
+import catchAsync from "../utils/catchAsync";
 import httpStatus from 'http-status'
 import jwt, { type JwtPayload } from 'jsonwebtoken'
 
@@ -35,8 +35,7 @@ const auth = (...RequiredRoll: TUser_Role[]) => {
         if(user.isDeleted){
             throw AppError(httpStatus.BAD_REQUEST,"User is deleted")
         }
-
-        req.user=decoded
+        req.user = decoded
 
         next()
     })

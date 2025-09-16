@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import type { TUser } from "./auth.interface.ts";
+import type { TUser } from "./auth.interface";
 
 const userSchema=new Schema<TUser>({
     firstName:{
