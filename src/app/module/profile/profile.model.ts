@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import type { TUserProfileUpdate } from "./profile.interface.ts";
+import type { TUserProfileUpdate } from "./profile.interface";
 
 const profileUpdateSchema=new Schema<TUserProfileUpdate>({
     dateOfBirth:{

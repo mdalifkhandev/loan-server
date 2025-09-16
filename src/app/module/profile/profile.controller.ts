@@ -1,10 +1,10 @@
-import catchAsync from "../../utils/catchAsync.ts"
-import sendResponse from "../../utils/sendResponse.ts" 
+import catchAsync from "../../utils/catchAsync"
+import sendResponse from "../../utils/sendResponse" 
 import httpStatus from 'http-status'
-import { UserServices } from "./user.service.ts"
+import { UserServices } from "./user.service"
 
 const userDeleted=catchAsync(async(req,res)=>{
-    const email=req.user.email
+    const email=req.user?.email
     const resualt=await UserServices.userDeletedFromDB(email)
     res.cookie('accessToken','')
     sendResponse(res,{

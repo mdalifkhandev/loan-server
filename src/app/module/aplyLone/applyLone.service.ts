@@ -1,8 +1,8 @@
-import AppError from "../../error/appError.ts";
-import { Profile } from "../profile/profile.model.ts";
-import type { TAplyLone } from "./applyLone.interface.ts";
+import AppError from "../../error/appError";
+import { Profile } from "../profile/profile.model";
+import type { TAplyLone } from "./applyLone.interface";
 import httpStatus from 'http-status'
-import { ApplyLone } from "./applyLone.model.ts";
+import { ApplyLone } from "./applyLone.model";
 
 const applyLoneFromDB=async(data:TAplyLone)=>{
     const profile=await Profile.findOne({_id:data.profileId})

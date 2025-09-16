@@ -1,5 +1,5 @@
 import type mongoose from "mongoose";
-import type { TErrorSource } from "../interface/errorType.ts";
+import type { TErrorSource } from "../interface/errorType";
 
 const casError=(err:mongoose.Error.CastError)=>{
     const errorSources:TErrorSource=[

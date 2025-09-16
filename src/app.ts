@@ -2,9 +2,9 @@ import express from 'express'
 import dotenv from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser"
-import { Routers } from './app/router/index.ts'
-import notFound from './app/middleware/notFound.ts'
-import globalError from './app/middleware/globalError.ts'
+import { Routers } from './app/router/index'
+import notFound from './app/middleware/notFound'
+import globalError from './app/middleware/globalError'
 
 dotenv.config()
 

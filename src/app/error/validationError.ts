@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import httpStatus from "http-status";
-import type { TErrorSource } from "../interface/errorType.ts";
+import type { TErrorSource } from "../interface/errorType";
 
 const validationError=(err:mongoose.Error.ValidationError)=>{
     const errorSources:TErrorSource=Object.values(err.errors).map((val:mongoose.Error.ValidatorError |mongoose.Error.CastError)=>{

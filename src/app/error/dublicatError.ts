@@ -1,4 +1,4 @@
-import type { TErrorSource } from "../interface/errorType.ts"
+import type { TErrorSource } from "../interface/errorType"
 import httpStatus from 'http-status'
 
 const dublicateError=(err:any)=>{

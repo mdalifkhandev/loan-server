@@ -1,7 +1,7 @@
 import e from "express";
-import { ApplyLoneController } from "./applyLone.controller.ts";
-import auth from "../../middleware/auth.ts";
-import { USER_ROLE } from "../../interface/types.ts";
+import { ApplyLoneController } from "./applyLone.controller";
+import auth from "../../middleware/auth";
+import { USER_ROLE } from "../../interface/types";
 
 const route=e.Router()
 

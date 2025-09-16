@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { AuthRouter } from "../module/auth/auth.route.ts";
-import { UserRouter } from "../module/profile/profile.route.ts";
-import { ApplyLoneRouter } from "../module/aplyLone/applyLone.route.ts";
+import { AuthRouter } from "../module/auth/auth.route";
+import { UserRouter } from "../module/profile/profile.route";
+import { ApplyLoneRouter } from "../module/aplyLone/applyLone.route";
 
 const router=Router()
 
