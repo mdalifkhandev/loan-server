@@ -2,11 +2,7 @@ import { model, Schema } from "mongoose";
 import type { TUser } from "./auth.interface";
 
 const userSchema=new Schema<TUser>({
-    firstName:{
-        type:String,
-        required:true
-    },
-    lastName:{
+    phone:{
         type:String,
         required:true
     },
@@ -28,6 +24,10 @@ const userSchema=new Schema<TUser>({
         type:Boolean,
         default:false
     },
+    agreedToTerms:{
+        type:Boolean,
+        required:true
+    }
 },{
     timestamps:true
 })

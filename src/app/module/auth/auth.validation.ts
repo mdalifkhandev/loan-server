@@ -1,27 +1,20 @@
 import z from "zod";
 
-// User registration/login validation schema
 const authValidationSchema = z.object({
   body: z.object({
-    firstName: z
-      .string({ message: "First name is required" })
-      .min(3, { message: "Too short, minimum 3 characters" })
-      .max(10, { message: "Too long, maximum 10 characters" }),
-    lastName: z
-      .string({ message: "Last name is required" })
-      .min(3, { message: "Too short, minimum 3 characters" })
-      .max(10, { message: "Too long, maximum 10 characters" }),
-    email: z
-      .string({ message: "Email is required" })
-      .email({ message: "Invalid email address" }),
-    password: z
-      .string({ message: "Password is required" }),
-    role: z
-      .enum(["admin", "user","lender"])
-      .default("user"),
-    isDeleted: z
-      .boolean()
-      .default(false)
+     phone: z
+    .string()
+    .min(10, "Phone number must be at least 10 characters long")
+    .max(15, "Phone number too long"),
+  email: z.string().email("Invalid email address"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters long"),
+  role: z.enum(["user", "lender", "admin"]).default("user"),
+  isDeleted: z.boolean().default(false),
+  agreedToTerms: z.boolean().refine((val) => val === true, {
+    message: "You must agree to the terms",
+  }),
   }),
 });
 

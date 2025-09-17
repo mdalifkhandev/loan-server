@@ -3,11 +3,12 @@ import { AuthServices } from "./auth.service";
 import httpStatus from 'http-status';
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
-import { JwtPayload } from "jsonwebtoken";
 
 // Create user
 const userCreated = catchAsync(async (req: Request, res: Response) => {
     const user = req.body;
+    console.log(user);
+    
     const data = await AuthServices.userCreatedFromDB(user);
     const { accessToken, resualt } = data;
 
@@ -16,7 +17,7 @@ const userCreated = catchAsync(async (req: Request, res: Response) => {
         statusCode: httpStatus.CREATED,
         success: true,
         message: 'User Created Successfully',
-        data: resualt
+        data: data
     });
 });
 
@@ -36,7 +37,7 @@ const userLogin = catchAsync(async (req: Request, res: Response) => {
         statusCode: httpStatus.OK,
         success: true,
         message: 'Login successfully',
-        data: data?.user
+        data: data
     });
 });
 
@@ -98,7 +99,8 @@ const sendMail = catchAsync(async (req: Request, res: Response) => {
 
 // Verify OTP
 const otpCodeVerify = catchAsync(async (req: Request, res: Response) => {
-    const { otp, email } = req.body;
+    const { otp:recOpt, email } = req.body;
+    const otp=Number(recOpt)
     const result = await AuthServices.otpCodeVerifyFromDB(otp, email);
 
     sendResponse(res, {

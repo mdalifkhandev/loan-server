@@ -1,9 +1,9 @@
-{
-  // Disable automatic Copilot suggestions
-  "editor.inlineSuggest.enabled": false,
-  "github.copilot.inlineSuggest.enable": true,
-  "github.copilot.enable": {
-    "workspace": false,
-    "user": false 
-  },
-}
+// {
+//   // Disable automatic Copilot suggestions
+//   "editor.inlineSuggest.enabled": false,
+//   "github.copilot.inlineSuggest.enable": true,
+//   "github.copilot.enable": {
+//     "workspace": false,
+//     "user": false 
+//   },
+// }
