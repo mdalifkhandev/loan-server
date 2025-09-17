@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "type": "commonjs",
  "scripts": {
-  "build": "tsc",
-  "start": "node dist/server.js",
+  "build": "tsc -w",
+  "start": "nodemon dist/server.js",
   "dev": "nodemon ./src/server.ts"
 },
   "license": "ISC",

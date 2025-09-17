@@ -1,4 +1,3 @@
-
 import { model, Schema } from "mongoose";
 import type { TAplyLone } from "./applyLone.interface";
 

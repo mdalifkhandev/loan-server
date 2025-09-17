@@ -24,7 +24,7 @@ const userCreatedFromDB = async (data: TUser) => {
     const newData = {
         ...data,
         password
-    }
+    }  
     const jwtPayload = {
         email: data.email,
         role: data.role
@@ -150,23 +150,28 @@ const sendMailFromDB = async (email: string) => {
     //otp expire
     handleOtpTime(otp)
 
-    try {
-        await transport.sendMail({
-            from: process.env.NODEMILER_USER,
-            to: email,
-            subject: "Your password reset code",
-            text: `Your password reset code is: ${otpStore}. It expires in 2 minutes.`,
-        });
-    } catch (err: any) {
-        console.log(err);
-        throw AppError(httpStatus.INTERNAL_SERVER_ERROR, ` OTP send faild ${err.message}`)
+    // try {
+    //     await transport.sendMail({
+    //         from: process.env.NODEMILER_USER,
+    //         to: email,
+    //         subject: "Your password reset code",
+    //         text: `Your password reset code is: ${otpStore}. It expires in 2 minutes.`,
+    //     });
+    // } catch (err: any) {
+    //     console.log(err);
+    //     throw AppError(httpStatus.INTERNAL_SERVER_ERROR, ` OTP send faild ${err.message}`)
 
+    // }
+    return {
+        email,
+        otpStore
     }
-    return otpStore
 }
 
 ///otp veryfi depandent by send email 
 const otpCodeVerifyFromDB = async (otp: number, email: string) => {
+    console.log(otp,otpStore,email);
+    
     const user = await User.findOne({ email })
     if (!user) {
         throw AppError(httpStatus.BAD_REQUEST,'user not found')
@@ -200,9 +205,15 @@ const resetPasswordFromDB = async (data: TResetPassword) => {
         throw AppError(httpStatus.BAD_REQUEST,'user is deleted')
     }
 
+    
     const isPasswordMatch = newPassword === confirmPassword
     if (!isPasswordMatch) {
         throw AppError(httpStatus.BAD_REQUEST, 'password not match')
+    }
+    
+    const oldPasswordMatch=await bcrypt.compare(newPassword,user.password)
+    if(oldPasswordMatch){
+        throw AppError(httpStatus.BAD_REQUEST,'New Password must be different from the old password')
     }
 
     const password=await bcrypt.hash(newPassword,10)

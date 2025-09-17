@@ -1,10 +1,10 @@
 export type TUser={
-    firstName:string,
-    lastName:string,
     email:string,
+    phone:string
     password:string,
     role:'user'|'lender'|'admin',
     isDeleted:boolean,
+    agreedToTerms:boolean
 }
 
 
