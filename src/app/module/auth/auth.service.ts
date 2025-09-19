@@ -150,18 +150,18 @@ const sendMailFromDB = async (email: string) => {
     //otp expire
     handleOtpTime(otp)
 
-    // try {
-    //     await transport.sendMail({
-    //         from: process.env.NODEMILER_USER,
-    //         to: email,
-    //         subject: "Your password reset code",
-    //         text: `Your password reset code is: ${otpStore}. It expires in 2 minutes.`,
-    //     });
-    // } catch (err: any) {
-    //     console.log(err);
-    //     throw AppError(httpStatus.INTERNAL_SERVER_ERROR, ` OTP send faild ${err.message}`)
+    try {
+        await transport.sendMail({
+            from: process.env.NODEMILER_USER,
+            to: email,
+            subject: "Your password reset code",
+            text: `Your password reset code is: ${otpStore}. It expires in 2 minutes.`,
+        });
+    } catch (err: any) {
+        console.log(err);
+        throw AppError(httpStatus.INTERNAL_SERVER_ERROR, ` OTP send faild ${err.message}`)
 
-    // }
+    }
     return {
         email,
         otpStore
