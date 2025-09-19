@@ -54,9 +54,23 @@ const getProfileInfoFromDB=async()=>{
     return result
 }
 
+
+const getSingleUserFromDB=async(email:string)=>{
+    const user=await User.findOne({email})
+    if(!user){
+        throw AppError(httpStatus.NOT_FOUND,'User Not Found')
+    }
+    if(user.isDeleted){
+        throw AppError(httpStatus.BAD_REQUEST,'User is deleted')
+    }
+    return user
+}
+
+
 export const UserServices={
     getUserFromDB,
     userDeletedFromDB,
     profileUpdateAndCreateFromDB,
-    getProfileInfoFromDB
+    getProfileInfoFromDB,
+    getSingleUserFromDB
 }

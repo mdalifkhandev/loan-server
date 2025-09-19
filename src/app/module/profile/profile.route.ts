@@ -13,4 +13,6 @@ router.patch('/update-profile',auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.len
 
 router.get('/profile',auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.lender),UserController.getProfileInfo)
 
+router.get('/me',auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.lender),UserController.getSingleUser)
+
 export const UserRouter=router

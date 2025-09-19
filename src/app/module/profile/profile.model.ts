@@ -2,51 +2,64 @@ import { model, Schema } from "mongoose";
 import type { TUserProfileUpdate } from "./profile.interface";
 
 const profileUpdateSchema=new Schema<TUserProfileUpdate>({
-    dateOfBirth:{
-        type:String,
-        required:false
+    parsonalInfo:{
+        firstName:{
+            type:String,
+            trim:true,
+        },
+        lastName:{
+            type:String,
+            trim:true,
+        },
+        dateOfBirth:{
+            type:String,
+            trim:true,
+        },
+        gender:{
+            type:String,
+            enum:['mail','female','other'],
+            trim:true,
+        }
     },
-    gender:{
-        type:String,
-        enum:['male','female','other'],
-        required:false
+    contactInfo:{
+        address:{
+            type:String,
+            trim:true,
+        },
+        city:{
+            type:String,
+            trim:true,
+        },
+        state:{
+            type:String,
+            trim:true,
+        },
+        ZipCode:{
+            type:String,
+            trim:true,
+        }
     },
-    address:{
-        type:String,
-        required:false
-    },
-    city:{
-        type:String,
-        required:false
-    },
-    state:{
-        type:String,
-        required:false
-    },
-    ZipCode:{
-        type:String,
-        required:false
-    },
-    annualIncome:{
-        type:Number,
-        required:false
-    },
-    valueOfLandOnership:{
-        type:Number,
-        required:false
-    },
-    electrictiBill:{
-        type:Number,
-        required:false
-    },
-    mobileManyBill:{
-        type:Number,
-        required:false
+    finalcialInfo:{
+        annualIncome:{
+            type:Number,
+            trim:true,
+        },
+        valueOfLandOnership:{
+            type:Number,
+            trim:true,
+        },
+        electrictiBill:{
+            type:Number,
+            trim:true,
+        },
+        mobileManyBill:{
+            type:Number,
+            trim:true,
+        }
     },
     existingLoanAmount:{
-        type:String,
-        default:'none',
-        required:false
+        type:String,    
+        trim:true,
     },
     userId:{
         type:Schema.Types.ObjectId,

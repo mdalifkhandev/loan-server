@@ -47,9 +47,23 @@ const getProfileInfo=catchAsync(async(req,res)=>{
     })
 })
 
+const getSingleUser=catchAsync(async(req,res)=>{
+    const email=req.user?.email as string
+    const resualt=await UserServices.getSingleUserFromDB(email)
+    sendResponse(res,{
+        statusCode:httpStatus.OK,
+        success:true,
+        message:'Get Single User info successfully',
+        data:resualt
+    })
+})
+
+
+
 export const UserController={
     getUser,
     userDeleted,
     profileUpdateAndCreate,
-    getProfileInfo
+    getProfileInfo,
+    getSingleUser
 }
