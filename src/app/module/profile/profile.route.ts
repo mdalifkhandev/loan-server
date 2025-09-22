@@ -15,4 +15,6 @@ router.get('/profile',auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.lender),User
 
 router.get('/me',auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.lender),UserController.getSingleUser)
 
+router.get('/profile/me',auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.lender),UserController.getSingleProfile)
+
 export const UserRouter=router

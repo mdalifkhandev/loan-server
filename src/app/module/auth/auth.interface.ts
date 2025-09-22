@@ -16,7 +16,7 @@ export type TLogin={
 export type TUpdathPassword={
     currentPassword:string
     newPassword:string
-    confirmPassword:string
+    confirmNewPassword:string
 }
 export type TResetPassword={
     newPassword:string
