@@ -1,77 +1,83 @@
 import { model, Schema } from "mongoose";
 import type { TUserProfileUpdate } from "./profile.interface";
 
-const profileUpdateSchema=new Schema<TUserProfileUpdate>({
-    parsonalInfo:{
-        firstName:{
-            type:String,
-            trim:true,
+const profileUpdateSchema = new Schema<TUserProfileUpdate>({
+    personalInfo: {
+        firstName: {
+            type: String,
+            trim: true,
         },
-        lastName:{
-            type:String,
-            trim:true,
+        lastName: {
+            type: String,
+            trim: true,
         },
-        dateOfBirth:{
-            type:String,
-            trim:true,
+        dateOfBirth: {
+            type: String,
+            trim: true,
         },
-        gender:{
-            type:String,
-            enum:['mail','female','other'],
-            trim:true,
+        gender: {
+            type: String,
+            enum: ['mail', 'female', 'other'],
+            trim: true,
         }
     },
-    contactInfo:{
-        address:{
-            type:String,
-            trim:true,
+    contactInfo: {
+        address: {
+            type: String,
+            trim: true,
         },
-        city:{
-            type:String,
-            trim:true,
+        city: {
+            type: String,
+            trim: true,
         },
-        state:{
-            type:String,
-            trim:true,
+        state: {
+            type: String,
+            trim: true,
         },
-        ZipCode:{
-            type:String,
-            trim:true,
+        zipCode: {
+            type: String,
+            trim: true,
         }
     },
-    finalcialInfo:{
-        annualIncome:{
-            type:Number,
-            trim:true,
+    financialInfo: {
+        annualIncome: {
+            type: Number,
+            trim: true,
         },
-        valueOfLandOnership:{
-            type:Number,
-            trim:true,
+        valueOfLandOwnership: {
+            type: Number,
+            trim: true,
         },
-        electrictiBill:{
-            type:Number,
-            trim:true,
+        electricityBill: {
+            type: Number,
+            trim: true,
         },
-        mobileManyBill:{
-            type:Number,
-            trim:true,
+        mobileMoneyBalance: {
+            type: Number,
+            trim: true,
+        },
+        existingLoanAmount: {
+            type: Number,
+            trim: true,
+        },
+        existingLoan: {
+            type: Boolean,
+        },
+        terms: {
+            type: Boolean,
         }
     },
-    existingLoanAmount:{
-        type:String,    
-        trim:true,
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-    userId:{
-        type:Schema.Types.ObjectId,
-        ref:'User',
-        required:true
-    },
-    isDeleted:{
-        type:Boolean,
-        default:false
+    isDeleted: {
+        type: Boolean,
+        default: false
     }
-},{
-    timestamps:true
+}, {
+    timestamps: true
 })
 
-export const Profile=model('Profile',profileUpdateSchema)
+export const Profile = model('Profile', profileUpdateSchema)

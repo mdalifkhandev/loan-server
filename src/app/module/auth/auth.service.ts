@@ -79,7 +79,8 @@ const LogOutFromDB = async (data: JwtPayload) => {
 }
 
 const updathPasswordFromDB = async (email: string, data: TUpdathPassword) => {
-    const newConfirmMatch = data.newPassword === data.confirmPassword
+    
+    const newConfirmMatch = data.newPassword === data.confirmNewPassword
 
     if (!newConfirmMatch) {
         throw AppError(httpStatus.BAD_REQUEST, 'New Password and Confirm Password Not Match')
@@ -94,7 +95,7 @@ const updathPasswordFromDB = async (email: string, data: TUpdathPassword) => {
     const isPasswordMatch = await bcrypt.compare(data.currentPassword, user.password)
 
     if (!isPasswordMatch) {
-        throw AppError(httpStatus.BAD_REQUEST, 'Incored Password')
+        throw AppError(httpStatus.BAD_REQUEST, 'Old Password and New Password is Match')
     }
 
     const newHashPassword = await bcrypt.hash(data.newPassword, 10)
@@ -119,7 +120,6 @@ const handleOtpTime = (value: any) => {
             otpStore = 0,
                 otpTimer = null
             console.log('OTP expire');
-
         }, 60 * 1000 * 2
         )
     }
@@ -158,7 +158,6 @@ const sendMailFromDB = async (email: string) => {
             text: `Your password reset code is: ${otpStore}. It expires in 2 minutes.`,
         });
     } catch (err: any) {
-        console.log(err);
         throw AppError(httpStatus.INTERNAL_SERVER_ERROR, ` OTP send faild ${err.message}`)
 
     }
@@ -170,8 +169,6 @@ const sendMailFromDB = async (email: string) => {
 
 ///otp veryfi depandent by send email 
 const otpCodeVerifyFromDB = async (otp: number, email: string) => {
-    console.log(otp,otpStore,email);
-    
     const user = await User.findOne({ email })
     if (!user) {
         throw AppError(httpStatus.BAD_REQUEST,'user not found')

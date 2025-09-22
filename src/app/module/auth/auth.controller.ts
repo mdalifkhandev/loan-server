@@ -7,8 +7,6 @@ import sendResponse from "../../utils/sendResponse";
 // Create user
 const userCreated = catchAsync(async (req: Request, res: Response) => {
     const user = req.body;
-    console.log(user);
-    
     const data = await AuthServices.userCreatedFromDB(user);
     const { accessToken, resualt } = data;
 
