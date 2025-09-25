@@ -53,11 +53,25 @@ const profileUpdateAndCreateFromDB = async (data: TUserProfileUpdate) => {
 
 }
 
-const getProfileInfoFromDB = async () => {
+const getProfileInfoFromDB = async (email:string) => {
+    const user=await User.findOne({email})
+    if(!user){
+        throw AppError(httpStatus.BAD_REQUEST,'User Does not exisit Pleace ligin')
+    }
+    if(user.isDeleted){
+        throw AppError(httpStatus.BAD_REQUEST,'Login and try agani')
+    }
     const result = await Profile.find().populate("userId")
     return result
 }
 const getSingleProfileFromDB = async (id: string) => {
+    const user=await User.findById(id)
+    if (!user) {
+        throw AppError(httpStatus.NOT_FOUND, 'User Not Found')
+    }
+    if (user.isDeleted) {
+        throw AppError(httpStatus.BAD_REQUEST, 'User is deleted')
+    }
     const result = await Profile.findOne({ userId: id }).populate('userId')
     return result
 }

@@ -24,7 +24,8 @@ const aproveLone=catchAsync(async(req,res)=>{
 })
 
 const getAllLone=catchAsync(async(req,res)=>{
-    const result=await ApplyLoneService.getAllLoneToDB()
+    const email=req?.user?.email
+    const result=await ApplyLoneService.getAllLoneToDB(email)
     sendResponse(res,{
         success:true,
         statusCode:httpStatus.OK,
@@ -33,9 +34,21 @@ const getAllLone=catchAsync(async(req,res)=>{
     })
 })
 
+const getSingleLone=catchAsync(async(req,res)=>{
+    const id=req.params.id
+    const email=req?.user?.email
+    const result=await ApplyLoneService.getSingleLoneToDB(id,email)
+    sendResponse(res,{
+        success:true,
+        statusCode:httpStatus.OK,
+        message:"get single lone successfully",
+        data:result
+    })
+})
 
 export const ApplyLoneController={
     applyLoneFunctin,
     aproveLone,
-    getAllLone
+    getAllLone,
+    getSingleLone
 }

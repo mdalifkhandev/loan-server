@@ -6,8 +6,6 @@ import bcrypt from 'bcrypt'
 import { createToken } from "./auth.utils";
 import type { JwtPayload } from "jsonwebtoken";
 import nodemailer from 'nodemailer'
-import crypto from 'crypto'
-
 
 
 let otpStore: number

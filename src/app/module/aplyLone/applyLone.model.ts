@@ -4,18 +4,36 @@ import type { TAplyLone } from "./applyLone.interface";
 const applyLoneSchema = new Schema<TAplyLone>({
     profileId: {
         type: Schema.Types.ObjectId,
-        require: true
+        require: true,
+        ref: 'Profile'
     },
-    loneAmount: {
+    userId: {
+        type: Schema.Types.ObjectId,
+        require: true,
+        ref: 'User'
+    },
+    term: {
+        type: Boolean,
+        required: true
+    },
+    creditScore: {
+        type: Number,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    loanAmount: {
         type: Number,
         required: true
     },
     status: {
         type: String,
-        enum: ['Approve', 'Reject', 'Pending'],
-        default: 'Pending'
+        enum: ['approved', 'rejected', 'pending'],
+        default: 'pending'
     },
-    ApproveLoneAmount: {
+    ApproveLoanAmount: {
         type: Number,
         required: false
     },
@@ -27,9 +45,12 @@ const applyLoneSchema = new Schema<TAplyLone>({
         type: Number,
         required: false
     },
-    node: {
+    note: {
         type: String,
         required: false
+    },
+    id: {
+        type: String,
     },
     isDeleted:{
         type:Boolean,

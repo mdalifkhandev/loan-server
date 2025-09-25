@@ -1,5 +1,9 @@
 import type { Types } from "mongoose";
 
+export type loneInfo={
+  loanAmount: number;
+}
+
 export type TUserProfileUpdate = {
   personalInfo?: {
     firstName?: string;

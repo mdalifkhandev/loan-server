@@ -8,7 +8,7 @@ import sendResponse from "../../utils/sendResponse";
 const userCreated = catchAsync(async (req: Request, res: Response) => {
     const user = req.body;
     const data = await AuthServices.userCreatedFromDB(user);
-    const { accessToken, resualt } = data;
+    const { accessToken } = data;
 
     res.cookie("accessToken", accessToken);
     sendResponse(res, {
