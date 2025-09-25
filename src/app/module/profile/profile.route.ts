@@ -11,7 +11,7 @@ router.get('/',auth(USER_ROLE.admin,USER_ROLE.lender),UserController.getUser)
 
 router.patch('/update-profile',auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.lender),UserController.profileUpdateAndCreate)
 
-router.get('/profile',auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.lender),UserController.getProfileInfo)
+router.get('/profile',auth(USER_ROLE.admin,USER_ROLE.lender),UserController.getProfileInfo)
 
 router.get('/me',auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.lender),UserController.getSingleUser)
 

@@ -2,11 +2,16 @@ import type { Types } from "mongoose"
 
 export type TAplyLone={
     profileId:Types.ObjectId
-    loneAmount:number
-    status:'Approve'|'Reject'|'Pending'
-    ApproveLoneAmount?:number
+    userId:Types.ObjectId
+    loanAmount:number
+    term:boolean
+    creditScore:number
+    city:string
+    status:'approved'|'rejected'|'pending'
+    ApproveLoanAmount?:number
     interested?:number
     termMonth?:number
-    node:string
+    note?:string
+    id?:string
     isDeleted:boolean
 }

@@ -11,14 +11,21 @@ dotenv.config()
 const app=express()
 
 app.use(express.json())
+// app.use(cors({
+//     origin: '*',
+//     credentials: true
+// }))
 app.use(cors({
-    origin:'http://localhost:3000',
-    credentials:true
-}))
+  origin: (origin, callback) => {
+    callback(null, origin || true);
+  },
+  credentials: true
+}));
+
 
 app.use(cookieParser())
 
-app.use('/api/v1',Routers)
+app.use('/api/v1', Routers)
 
 app.use(notFound)
 app.use(globalError)

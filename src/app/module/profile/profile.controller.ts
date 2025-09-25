@@ -38,7 +38,8 @@ const profileUpdateAndCreate=catchAsync(async(req,res)=>{
 })
 
 const getProfileInfo=catchAsync(async(req,res)=>{
-    const resualt=await UserServices.getProfileInfoFromDB()
+    const email=req?.user?.email
+    const resualt=await UserServices.getProfileInfoFromDB(email)
     sendResponse(res,{
         statusCode:httpStatus.OK,
         success:true,
