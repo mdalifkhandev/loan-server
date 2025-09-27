@@ -24,7 +24,8 @@ const aproveLone=catchAsync(async(req,res)=>{
 })
 
 const getAllLone=catchAsync(async(req,res)=>{
-    const email=req?.user?.email
+    // const email=req?.user?.email
+    const email=req.query.email as string
     const result=await ApplyLoneService.getAllLoneToDB(email)
     sendResponse(res,{
         success:true,
@@ -36,7 +37,8 @@ const getAllLone=catchAsync(async(req,res)=>{
 
 const getSingleLone=catchAsync(async(req,res)=>{
     const id=req.params.id
-    const email=req?.user?.email
+    // const email=req?.user?.email
+    const email=req.query.email as string
     const result=await ApplyLoneService.getSingleLoneToDB(id,email)
     sendResponse(res,{
         success:true,
