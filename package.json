@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "commonjs",
  "scripts": {
-  "build": "tsc -w",
+  "build": "tsc",
   "start": "nodemon dist/server.js",
   "dev": "nodemon ./src/server.ts"
 },
