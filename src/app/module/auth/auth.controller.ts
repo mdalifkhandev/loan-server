@@ -10,7 +10,13 @@ const userCreated = catchAsync(async (req: Request, res: Response) => {
     const data = await AuthServices.userCreatedFromDB(user);
     const { accessToken } = data;
 
-    res.cookie("accessToken", accessToken);
+    res.cookie("accessToken", data.accessToken, {
+        secure: true,
+        httpOnly: true,
+        sameSite: 'none',
+        maxAge: 100 * 60 * 60 * 24,
+    });
+
     sendResponse(res, {
         statusCode: httpStatus.CREATED,
         success: true,
@@ -27,8 +33,8 @@ const userLogin = catchAsync(async (req: Request, res: Response) => {
     res.cookie("accessToken", data.accessToken, {
         secure: true,
         httpOnly: true,
-        sameSite: true,
-        maxAge: 100 * 60 * 60 * 24
+        sameSite: 'none',
+        maxAge: 100 * 60 * 60 * 24,
     });
 
     sendResponse(res, {
@@ -97,8 +103,8 @@ const sendMail = catchAsync(async (req: Request, res: Response) => {
 
 // Verify OTP
 const otpCodeVerify = catchAsync(async (req: Request, res: Response) => {
-    const { otp:recOpt, email } = req.body;
-    const otp=Number(recOpt)
+    const { otp: recOpt, email } = req.body;
+    const otp = Number(recOpt)
     const result = await AuthServices.otpCodeVerifyFromDB(otp, email);
 
     sendResponse(res, {
