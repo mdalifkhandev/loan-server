@@ -68,7 +68,8 @@ const LogOut = catchAsync(async (req: Request, res: Response) => {
 
 // Update password
 const updathPassword = catchAsync(async (req: Request, res: Response) => {
-    if (!req?.user?.email) {
+    const email=req.body.email
+    if (!email) {
         return sendResponse(res, {
             statusCode: httpStatus.UNAUTHORIZED,
             success: false,
@@ -78,7 +79,7 @@ const updathPassword = catchAsync(async (req: Request, res: Response) => {
     }
 
     const data = req.body;
-    const result = await AuthServices.updathPasswordFromDB(req?.user?.email, data);
+    const result = await AuthServices.updathPasswordFromDB(email, data);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,

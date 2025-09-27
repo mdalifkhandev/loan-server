@@ -4,7 +4,8 @@ import httpStatus from 'http-status'
 import { UserServices } from "./user.service"
 
 const userDeleted=catchAsync(async(req,res)=>{
-    const email=req.user?.email
+    // const email=req.user?.email
+    const email=req.body.email
     const resualt=await UserServices.userDeletedFromDB(email)
     res.cookie('accessToken','')
     sendResponse(res,{
@@ -38,7 +39,8 @@ const profileUpdateAndCreate=catchAsync(async(req,res)=>{
 })
 
 const getProfileInfo=catchAsync(async(req,res)=>{
-    const email=req?.user?.email
+    // const email=req?.user?.email
+    const email=req.query.email as string
     const resualt=await UserServices.getProfileInfoFromDB(email)
     sendResponse(res,{
         statusCode:httpStatus.OK,
@@ -49,7 +51,8 @@ const getProfileInfo=catchAsync(async(req,res)=>{
 })
 
 const getSingleUser=catchAsync(async(req,res)=>{
-    const email=req.user?.email as string
+    // const email=req.user?.email as string
+    const email=req.query.email as string
     const resualt=await UserServices.getSingleUserFromDB(email)
     sendResponse(res,{
         statusCode:httpStatus.OK,
