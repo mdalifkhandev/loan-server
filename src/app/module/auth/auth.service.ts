@@ -64,8 +64,8 @@ const userLoginFromDB = async (data: TLogin) => {
 
 
 
-const LogOutFromDB = async (data: JwtPayload) => {
-    const user = await User.findOne({ email: data.email })
+const LogOutFromDB = async (email: string) => {
+    const user = await User.findOne({ email })
     if (!user) {
         throw AppError(httpStatus.NOT_FOUND, 'User is not Found')
     }
