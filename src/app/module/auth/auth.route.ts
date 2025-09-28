@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { AuthController } from "./auth.controller";
 import auth from "../../middleware/auth";
-import { USER_ROLE } from "../../interface/types";
+// import { USER_ROLE } from "../../interface/types";
 import validationRequest from "../../middleware/validationRequest";
 import { AuthValidation } from "./auth.validation";
 
@@ -11,9 +11,9 @@ router.post('/signup',validationRequest(AuthValidation.authValidationSchema),Aut
 
 router.post('/login',AuthController.userLogin)
 
-router.post('/logout',auth(USER_ROLE.user,USER_ROLE.admin,USER_ROLE.lender),AuthController.LogOut)
+router.post('/logout'/*,auth(USER_ROLE.user,USER_ROLE.admin,USER_ROLE.lender)*/,AuthController.LogOut)
 
-router.post('/update-password',auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.lender),AuthController.updathPassword)
+router.post('/update-password'/*,auth(USER_ROLE.admin,USER_ROLE.user,USER_ROLE.lender)*/,AuthController.updathPassword)
 
 router.post('/send-mail',AuthController.sendMail)
 
