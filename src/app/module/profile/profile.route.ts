@@ -1,6 +1,6 @@
 import e from "express";
-import auth from "../../middleware/auth";
-import { USER_ROLE } from "../../interface/types";
+// import auth from "../../middleware/auth";
+// import { USER_ROLE } from "../../interface/types";
 import { UserController } from "./profile.controller";
 
 const router=e.Router()

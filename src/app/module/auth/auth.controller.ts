@@ -47,7 +47,7 @@ const userLogin = catchAsync(async (req: Request, res: Response) => {
 
 // Logout
 const LogOut = catchAsync(async (req: Request, res: Response) => {
-    if (!req?.user) {
+    if (!req?.body.email) {
         return sendResponse(res, {
             statusCode: httpStatus.UNAUTHORIZED,
             success: false,
@@ -56,7 +56,7 @@ const LogOut = catchAsync(async (req: Request, res: Response) => {
         });
     }
 
-    const resualt = await AuthServices.LogOutFromDB(req?.user);
+    const resualt = await AuthServices.LogOutFromDB(req.body.email);
     res.cookie('accessToken', '');
     sendResponse(res, {
         statusCode: httpStatus.OK,
