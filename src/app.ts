@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import dotenv from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser"
@@ -8,10 +8,10 @@ import globalError from './app/middleware/globalError'
 
 dotenv.config()
 
-const app=express()
+const app = express()
 
 app.use(express.json())
-const allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000','https://lone-clain.vercel.app','https://lone-frontend.vercel.app/']; 
+const allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://lone-clain.vercel.app', 'https://lone-frontend.vercel.app'];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -31,8 +31,8 @@ app.use('/api/v1', Routers)
 app.use(notFound)
 app.use(globalError)
 
-app.get('/',(req,res)=>{
-    res.send('hello world')
+app.get('/', (req:Request, res:Response) => {
+  res.send('hello world')
 })
 
 export default app
