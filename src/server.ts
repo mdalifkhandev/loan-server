@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import app from "./app";
-
+import 'dotenv/config';
 
 const port=process.env.PORT || 5001
 
@@ -21,3 +21,4 @@ const dataBaseConnection=async()=>{
 }
 
 dataBaseConnection()
+
