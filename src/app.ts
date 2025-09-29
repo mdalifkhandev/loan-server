@@ -11,7 +11,7 @@ dotenv.config()
 const app=express()
 
 app.use(express.json())
-const allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000','https://lone-clain.vercel.app']; 
+const allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000','https://lone-clain.vercel.app','https://lone-frontend.vercel.app/']; 
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
